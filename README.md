@@ -1,5 +1,5 @@
 # gowo.sh
-Web-API for [gowo.su](https://gowo.su) website to joint view films, cartoons, serials, anime and etc with somebody
+Web-API for [gowo.su](https://gowo.su) website to joint view films, cartoons, serials, anime and etc
 
 ## Example
 ```bash
