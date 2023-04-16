@@ -1,16 +1,17 @@
 #!/bin/bash
 
 api="https://gowo.su/api"
-node_api="https://sports-gowo-su.cf:8443"
 token=null
 user_id=null
+node_api="https://sports-gowo-su.cf:8443"
+user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36"
 
 function login() {
 	# 1 - login: (string): <email, phone number>
 	# 2 - password: (string): <password>
 	response=$(curl --request POST \
 		--url "$api/token" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--data '{
@@ -33,7 +34,7 @@ function register() {
 	# 6 - password: (string): <password>
 	curl --request POST \
 		--url "$api/registration" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--data '{
@@ -49,7 +50,7 @@ function register() {
 function get_account_info() {
 	curl --request GET \
 		--url "$api/current" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token"
@@ -58,7 +59,7 @@ function get_account_info() {
 function get_menu_data() {
 	curl --request GET \
 		--url "$api/menu-data" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -66,7 +67,7 @@ function get_menu_data() {
 function get_vip_users() {
 	curl --request GET \
 		--url "$api/vip-users" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -74,7 +75,7 @@ function get_vip_users() {
 function get_new_films() {
 	curl --request GET \
 		--url "$api/new-films" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -82,7 +83,7 @@ function get_new_films() {
 function get_last_comments() {
 	curl --request GET \
 		--url "$api/last-comments-films" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -92,7 +93,7 @@ function get_active_rooms() {
 	# 2 - start: (integer): <start - default: 0>
 	curl --request GET \
 		--url "$api/active-rooms?limit=${1:-10}&start=${2:-0}" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -100,7 +101,7 @@ function get_active_rooms() {
 function get_last_users() {
 	curl --request GET \
 		--url "$api/last-users" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -110,7 +111,7 @@ function get_posts_users() {
 	# 2 - start: (integer): <start - default: 0>
 	curl --request GET \
 		--url "$api/posts-users?limit=${1:-20}&start=${2:-0}" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -120,7 +121,7 @@ function emote_to_post() {
 	# 2 - smile: (string): <smile>
 	curl --request POST \
 		--url "$api/emotions" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -134,7 +135,7 @@ function get_user_info() {
 	# 1 - user_id: (integer): <user_id>
 	curl --request GET \
 		--url "$api/user/$1" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -143,7 +144,7 @@ function get_user_posts() {
 	# 1 - user_id: (integer): <user_id>
 	curl --request GET \
 		--url "$api/user/posts/$1" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -152,7 +153,7 @@ function follow_user() {
 	# 1 - user_id: (integer): <user_id>
 	curl --request POST \
 		--url "$api/user/follow/$1" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token"
@@ -162,7 +163,7 @@ function unfollow_user() {
 	# 1 - user_id: (integer): <user_id>
 	curl --request POST \
 		--url "$api/user/unfollow/$1" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token"
@@ -173,7 +174,7 @@ function comment_post() {
 	# 2 - id: (integer): <post_id>
 	curl --request POST \
 		--url "$api/user/comment/create" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -187,7 +188,7 @@ function comment_post() {
 function get_dialogs() {
 	curl --request GET \
 		--url "$api/dialogs" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token"
@@ -196,7 +197,7 @@ function get_dialogs() {
 function get_notifications() {
 	curl --request GET \
 		--url "$api/notifications" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token"
@@ -205,7 +206,7 @@ function get_notifications() {
 function get_films_recommendation() {
 	curl --request GET \
 		--url "$api/films/recommendation" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -215,7 +216,7 @@ function send_dialog_message() {
 	# 2 - message: (string): <message>
 	curl --request POST \
 		--url "$api/message" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -232,7 +233,7 @@ function search() {
 	# 4 - target: (string): <target>
 	curl --request GET \
 		--url "$api/find?s=$1&start=${2:-0}&limit=${3:-20}&target=$4" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -240,7 +241,7 @@ function search() {
 function get_movie_filters() {
 	curl --request GET \
 		--url "$api/params-filter-movies" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -248,7 +249,7 @@ function get_movie_filters() {
 function get_novelties() {
 	curl --request GET \
 		--url "$api/user/widget/novelties" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token"
@@ -270,7 +271,7 @@ function edit_profile() {
 	birthday=$(jq -r ".birthday" <<< "$account_info")
 	curl --request POST \
 		--url "$api/settings" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -295,7 +296,7 @@ function get_user_followers() {
 	# 3 - limit: (integer): <limit - default: 20>
 	curl --request GET \
 		--url "$api/user/followers/$1?start=${2:-0}&limit=${3:-20}" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -306,7 +307,7 @@ function get_user_followings() {
 	# 3 - limit: (integer): <limit - default: 20>
 	curl --request GET \
 		--url "$api/user/following/$1?start=${2:-0}&limit=${3:-20}" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -315,7 +316,7 @@ function get_user_gifts() {
 	# 1 - user_id: (integer): <user_id>
 	curl --request GET \
 		--url "$api/user/gifts/$1" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -327,7 +328,7 @@ function user_global_search() {
 	# 4 - limit: (integer): <limit - default: 20>
 	curl --request POST \
 		--url "$api/user/global-search" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--data '{
@@ -343,7 +344,7 @@ function get_bookmarks() {
 	# 2 - limit: (integer): <limit - default: 20>
 	curl --request GET \
 		--url "$api/bookmarks/get?start=${1:-0}&limit=${2:-20}" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token"
@@ -353,7 +354,7 @@ function create_post() {
 	# 1 - message: (string): <message>
 	curl --request POST \
 		--url "$api/user/posts/create" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -366,7 +367,7 @@ function delete_post() {
 	# 1 - id: (integer): <post_id>
 	curl --request POST \
 		--url "$api/user/posts/delete" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -379,7 +380,7 @@ function get_film_info() {
 	# 1 - film_id: (integer): <film_id>
 	curl --request GET \
 		--url "$api/movie?id=$1" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json"
 }
@@ -388,7 +389,7 @@ function get_film_casts() {
 	# 1 - film_id: (integer): <film_id>
 	curl --request POST \
 		--url "$api/get-film-casts" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--data '{
@@ -400,7 +401,7 @@ function get_film_comments() {
 	# 1 - film_id: (integer): <film_id>
 	curl --request POST \
 		--url "$api/comments-film" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--data '{
@@ -413,7 +414,7 @@ function get_similar_films() {
 	# 1 - film_id: (integer): <film_id>
 	curl --request POST \
 		--url "$api/similar" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--data '{
@@ -426,7 +427,7 @@ function create_room() {
 	# 2 - id: (integer): <film_id>
 	curl --request POST \
 		--url "$api/room/create" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -440,7 +441,7 @@ function close_room() {
 	# 1 - room_id: (string): <room_id>
 	curl --request POST \
 		--url "$api/similar" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -453,7 +454,7 @@ function get_room_info() {
 	# 1 - room_id: (string): <room_id>
 	curl --request POST \
 		--url "$api/close-room" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--data '{
@@ -465,7 +466,7 @@ function join_room() {
 	# 1 - room_id: (string): <room_id>
 	curl --request POST \
 		--url "$node_api/room/join" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -479,7 +480,7 @@ function send_room_message() {
 	# 2 - message: (string): <message>
 	curl --request POST \
 		--url "$node_api/room/message" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -493,7 +494,7 @@ function leave_room() {
 	# 1 - room_id: (string): <room_id>
 	curl --request POST \
 		--url "$node_api/room/disconnect" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -505,7 +506,7 @@ function leave_room() {
 function get_opened_rooms() {
 	curl --request GET \
 		--url "$api/opened-rooms" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token"
@@ -516,7 +517,7 @@ function change_password() {
 	# 2 - new_password: (string): <new_password>
 	curl --request POST \
 		--url "$api/change-password" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token" \
@@ -530,7 +531,7 @@ function change_password() {
 function delete_account() {
 	curl --request DELETE \
 		--url "$api/delete-account" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $token"
@@ -540,7 +541,7 @@ function recover_account() {
 	# 1 - token: (string): <token>
 	curl --request POST \
 		--url "$api/recover-account" \
-		--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36" \
+		--user-agent "$user_agent" \
 		--header "accept: application/json" \
 		--header "content-type: application/json" \
 		--header "authorization: Bearer $1"
