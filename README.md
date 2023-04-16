@@ -3,6 +3,6 @@ Web-API for [gowo.su](https://gowo.su) website to joint view films, cartoons, se
 
 ## Example
 ```bash
-source gowo.sh
+source ./gowo.sh
 login "login" "password"
 ```
